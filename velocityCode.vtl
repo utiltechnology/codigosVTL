@@ -67,19 +67,17 @@ $cantidad
 
 $cantidad
 
+##parsear un json en formato string a un formato json e iterarlo
+#set($cadena = '[{"fruta":"Mango"},{"fruta":"Pera"},{"fruta":"Manzana"}]')
+#set ($json= $jsonTool.parse($cadena))
+#foreach($frutas in $json)
+$frutas
+#end
 
 ##Para ver la cantidad de objetos del json:
 $json1[0].size()
 
 Para reemplazar un string por otro:
-#set($interfaz = $interfaz.replaceAll("True","Correcto"))
-
-
-##En prueba, aun no me funciona ------
-#set($array = [{"fruta":"Mango","color":"amarillo"}])
-#set($json = $jsonTool.parse($omsorderdetails_getDetailsByTypeServiceAndServiceId_product_item_items))
-$array.class
-$array
-
-##set($json1 = [{"id":56431,"name":"El Padrino","year":1972},{"id":7553",name":"El Padrino 2","year":1974},{"id":19563,"name":"El Padrino III","year":1990}])
-##$json1
+#set($texto = "hola como estas?")
+#set($texto = $texto.replaceAll("hola","Saludos,"))
+$texto
