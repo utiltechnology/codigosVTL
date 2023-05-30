@@ -1,0 +1,85 @@
+#set($variable = "Como estas?")
+#set($estatus ="ACTIVE")
+#set($cantidad = 3654)
+
+##Para reemplazar palabras:
+$variable.replace("Como", "Donde")
+
+##Para ver si contiene la cadena de caracteres que se escriba dentro del parentesis
+$estatus.contains("ACTIVE")
+
+
+##Para mostrar un texto a partir del numero que se indique dentro del parentesis:
+$variable.substring(5)
+
+Para poner todas las palabras en mayusculas
+$variable.toUpperCase()
+
+##Formateo de fecha:
+#set($fecha = "2023-02-24T09:07:31")
+#set($date = $dateTool.toDate("yyyy-MM-dd", $fecha))
+#set($fecha = $dateTool.format("dd'/'MM'/'yy", $date))
+$fecha
+
+##Para asignar un valor numerico e imprimirlo sin espacios:
+#if($cantidad)1000#{end}
+
+##Codigo para concatenar una coma en medio de un string v1.1
+#if($cantidad.length() == 4)
+#set ($cantidad = $cantidad.substring(0,1).concat(",").concat($cantidad.substring(1)))
+#elseif($cantidad.length() == 5)
+#set ($cantidad = $cantidad.substring(0,2).concat(",").concat($cantidad.substring(2)))
+#elseif($cantidad.length() == 6)
+#set ($cantidad = $cantidad.substring(0,3).concat(",").concat($cantidad.substring(3)))
+#end
+$cantidad
+
+##Codigo para concatenar una coma en medio de un string v1.2 (se le introdujo que tambien concatenara un punto y 2 ceros)
+#set($customform_save_Monto_Digitado =['1000','41,015','2000.00','44,000.00'])
+
+#set($cifra = $customform_save_Monto_Digitado[0]) 
+
+#set($cantidad = $cifra) 
+
+#if(!$cifra.contains(",") && !$cifra.contains("."))
+#if($cantidad.length() == 4) 
+#set ($cantidad = $cantidad.substring(0,1).concat(",").concat($cantidad.substring(1).concat(".00"))) 
+#elseif($cantidad.length() == 5) 
+#set ($cantidad = $cantidad.substring(0,2).concat(",").concat($cantidad.substring(2).concat(".00"))) 
+#elseif($cantidad.length() == 6) 
+#set ($cantidad = $cantidad.substring(0,3).concat(",").concat($cantidad.substring(3).concat(".00")))
+#end
+
+#elseif($cifra.contains(".") && !$cifra.contains(","))
+#set ($ubiPunto = $cantidad.indexOf("."))
+#set ($part1 = $cantidad.substring(0,$ubiPunto))
+#if($part1.length() == 4)
+#set ($cantidad = $part1.substring(0,1).concat(",").concat($cantidad.substring(1)))
+#elseif($part1.length() == 5)
+#set ($cantidad = $part1.substring(0,2).concat(",").concat($cantidad.substring(2)))
+#elseif($part1.length() == 6)
+#set ($cantidad = $part1.substring(0,3).concat(",").concat($cantidad.substring(3))) 
+#end
+
+#elseif($cifra.contains(",") && !$cifra.contains("."))
+#set ($cantidad = $cantidad.concat(".00"))
+#end
+
+$cantidad
+
+
+##Para ver la cantidad de objetos del json:
+$json1[0].size()
+
+Para reemplazar un string por otro:
+#set($interfaz = $interfaz.replaceAll("True","Correcto"))
+
+
+##En prueba, aun no me funciona ------
+#set($array = [{"fruta":"Mango","color":"amarillo"}])
+#set($json = $jsonTool.parse($omsorderdetails_getDetailsByTypeServiceAndServiceId_product_item_items))
+$array.class
+$array
+
+##set($json1 = [{"id":56431,"name":"El Padrino","year":1972},{"id":7553",name":"El Padrino 2","year":1974},{"id":19563,"name":"El Padrino III","year":1990}])
+##$json1
